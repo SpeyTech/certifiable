@@ -1,0 +1,317 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" width="920" height="440">
+  <defs>
+    <style>
+      .bg { fill: #0a0a0a; }
+      .panel { fill: #111111; }
+      .panel-border { fill: none; stroke: #222222; stroke-width: 1; }
+
+      .label-platform {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 10.5px;
+        font-weight: 600;
+        letter-spacing: 0.10em;
+        text-transform: uppercase;
+        fill: #888888;
+      }
+      .label-compiler {
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        font-size: 9px;
+        font-weight: 400;
+        letter-spacing: 0.06em;
+        fill: #444444;
+      }
+      .label-stage {
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        font-size: 9.5px;
+        font-weight: 500;
+        fill: #707070;
+        letter-spacing: 0.02em;
+      }
+      .hash-primary {
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        font-size: 11px;
+        font-weight: 500;
+        fill: #d0d0d0;
+        letter-spacing: 0.04em;
+      }
+      .hash-secondary {
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        font-size: 9.5px;
+        font-weight: 400;
+        fill: #484848;
+        letter-spacing: 0.03em;
+      }
+      .connector-line {
+        fill: none;
+        stroke: #00d4aa;
+        stroke-width: 1;
+        opacity: 0.2;
+      }
+      .match-label {
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        font-size: 13px;
+        font-weight: 400;
+        fill: #00d4aa;
+        opacity: 0.45;
+        letter-spacing: 0.02em;
+        text-anchor: middle;
+      }
+      .match-tick {
+        fill: none;
+        stroke: #00d4aa;
+        stroke-width: 1;
+        opacity: 0.35;
+      }
+      .result-bg { fill: #041410; }
+      .result-border { fill: none; stroke: #00d4aa; stroke-width: 1; opacity: 0.5; }
+      .result-label {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 9px;
+        font-weight: 500;
+        fill: #00d4aa;
+        opacity: 0.55;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .result-main {
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        font-size: 13px;
+        font-weight: 600;
+        fill: #b0b0b0;
+        letter-spacing: 0.05em;
+      }
+      .result-yes {
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        fill: #00ffbb;
+        letter-spacing: 0.05em;
+      }
+      .result-sub {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 9px;
+        font-weight: 400;
+        fill: #00d4aa;
+        opacity: 0.4;
+        letter-spacing: 0.10em;
+      }
+      .oneliner {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 300;
+        fill: #444444;
+        letter-spacing: 0.04em;
+      }
+      .oneliner-em {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        fill: #555555;
+        letter-spacing: 0.04em;
+      }
+      .row-sep { stroke: #181818; stroke-width: 1; }
+      .header-sep { stroke: #1e1e1e; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="920" height="440" class="bg"/>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- LEFT PANEL — Linux x86_64 / GCC 12.2.0               -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <rect x="24" y="24" width="334" height="284" rx="3" class="panel"/>
+  <rect x="24" y="24" width="334" height="284" rx="3" class="panel-border"/>
+
+  <!-- Header row -->
+  <rect x="24" y="24" width="334" height="38" rx="3" fill="#151515"/>
+  <rect x="24" y="50" width="334" height="12" fill="#151515"/>
+  <line x1="24" y1="62" x2="358" y2="62" class="header-sep"/>
+  <text x="40" y="44" class="label-platform">Linux x86_64</text>
+  <text x="40" y="56" class="label-compiler">GCC 12.2.0</text>
+
+  <!-- Row: data -->
+  <line x1="24" y1="79" x2="358" y2="79" class="row-sep"/>
+  <text x="40" y="73" class="label-stage">data</text>
+  <text x="100" y="73" class="hash-primary">2f0c6228</text>
+  <text x="196" y="73" class="hash-secondary">001d1250...f6af7bee</text>
+
+  <!-- Row: training -->
+  <line x1="24" y1="103" x2="358" y2="103" class="row-sep"/>
+  <text x="40" y="94" class="label-stage">training</text>
+  <text x="100" y="94" class="hash-primary">36b34d87</text>
+  <text x="196" y="94" class="hash-secondary">459ead09...13bf7dfc</text>
+
+  <!-- Row: quant -->
+  <line x1="24" y1="127" x2="358" y2="127" class="row-sep"/>
+  <text x="40" y="118" class="label-stage">quant</text>
+  <text x="100" y="118" class="hash-primary">8c78bae6</text>
+  <text x="196" y="118" class="hash-secondary">45d6f06a...d3703942</text>
+
+  <!-- Row: deploy -->
+  <line x1="24" y1="151" x2="358" y2="151" class="row-sep"/>
+  <text x="40" y="142" class="label-stage">deploy</text>
+  <text x="100" y="142" class="hash-primary">32296bbc</text>
+  <text x="196" y="142" class="hash-secondary">342c91ba...1f69d17f</text>
+
+  <!-- Row: inference -->
+  <line x1="24" y1="175" x2="358" y2="175" class="row-sep"/>
+  <text x="40" y="166" class="label-stage">inference</text>
+  <text x="100" y="166" class="hash-primary">48f4eceb</text>
+  <text x="196" y="166" class="hash-secondary">c0eec79a...178c0138</text>
+
+  <!-- Row: monitor -->
+  <line x1="24" y1="199" x2="358" y2="199" class="row-sep"/>
+  <text x="40" y="190" class="label-stage">monitor</text>
+  <text x="100" y="190" class="hash-primary">da7f4999</text>
+  <text x="196" y="190" class="hash-secondary">2d875a63...d1f9eb8a</text>
+
+  <!-- Row: verify -->
+  <line x1="24" y1="223" x2="358" y2="223" class="row-sep"/>
+  <text x="40" y="214" class="label-stage">verify</text>
+  <text x="100" y="214" class="hash-primary">33e41fca</text>
+  <text x="196" y="214" class="hash-secondary">aa25c405...e85ae876</text>
+
+  <line x1="24" y1="237" x2="358" y2="237" class="row-sep"/>
+
+  <!-- Panel footer -->
+  <rect x="24" y="237" width="334" height="71" fill="#0d0d0d" rx="0"/>
+  <rect x="24" y="296" width="334" height="12" fill="#0d0d0d" rx="3"/>
+  <text x="40" y="257" class="label-compiler" style="fill:#2e2e2e; font-size:8px; letter-spacing:0.14em">SHA-256 · FIPS 180-4</text>
+  <text x="40" y="271" class="label-compiler" style="fill:#252525; font-size:8px; letter-spacing:0.14em">PIPELINE STAGE COMMITMENTS</text>
+  <text x="40" y="285" class="label-compiler" style="fill:#1e1e1e; font-size:8px; letter-spacing:0.14em">Q16.16 FIXED-POINT · PURE C99</text>
+
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- CENTRE COLUMN — Match indicators                      -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <!-- Connector lines per row -->
+  <line x1="358" y1="70"  x2="562" y2="70"  class="connector-line"/>
+  <line x1="358" y1="91"  x2="562" y2="91"  class="connector-line"/>
+  <line x1="358" y1="115" x2="562" y2="115" class="connector-line"/>
+  <line x1="358" y1="139" x2="562" y2="139" class="connector-line"/>
+  <line x1="358" y1="163" x2="562" y2="163" class="connector-line"/>
+  <line x1="358" y1="187" x2="562" y2="187" class="connector-line"/>
+  <line x1="358" y1="211" x2="562" y2="211" class="connector-line"/>
+
+  <!-- Centre match column box -->
+  <rect x="406" y="55" width="108" height="192" rx="2" fill="#0c0c0c"/>
+  <rect x="406" y="55" width="108" height="192" rx="2" fill="none" stroke="#1c1c1c" stroke-width="1"/>
+
+  <!-- = labels per row -->
+  <text x="460" y="76"  class="match-label">=</text>
+  <text x="460" y="97"  class="match-label">=</text>
+  <text x="460" y="121" class="match-label">=</text>
+  <text x="460" y="145" class="match-label">=</text>
+  <text x="460" y="169" class="match-label">=</text>
+  <text x="460" y="193" class="match-label">=</text>
+  <text x="460" y="217" class="match-label">=</text>
+
+  <!-- Tick lines in centre column -->
+  <line x1="418" y1="79"  x2="502" y2="79"  class="match-tick"/>
+  <line x1="418" y1="103" x2="502" y2="103" class="match-tick"/>
+  <line x1="418" y1="127" x2="502" y2="127" class="match-tick"/>
+  <line x1="418" y1="151" x2="502" y2="151" class="match-tick"/>
+  <line x1="418" y1="175" x2="502" y2="175" class="match-tick"/>
+  <line x1="418" y1="199" x2="502" y2="199" class="match-tick"/>
+  <line x1="418" y1="223" x2="502" y2="223" class="match-tick"/>
+
+  <!-- Centre column header label -->
+  <text x="460" y="44" class="match-label" style="font-size:7px; opacity:0.3">7 OF 7</text>
+
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- RIGHT PANEL — macOS x86_64 / Apple Clang             -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <rect x="562" y="24" width="334" height="284" rx="3" class="panel"/>
+  <rect x="562" y="24" width="334" height="284" rx="3" class="panel-border"/>
+
+  <!-- Header row -->
+  <rect x="562" y="24" width="334" height="38" rx="3" fill="#151515"/>
+  <rect x="562" y="50" width="334" height="12" fill="#151515"/>
+  <line x1="562" y1="62" x2="896" y2="62" class="header-sep"/>
+  <text x="578" y="44" class="label-platform">macOS x86_64</text>
+  <text x="578" y="56" class="label-compiler">Apple Clang</text>
+
+  <!-- Row: data -->
+  <line x1="562" y1="79" x2="896" y2="79" class="row-sep"/>
+  <text x="578" y="73" class="label-stage">data</text>
+  <text x="638" y="73" class="hash-primary">2f0c6228</text>
+  <text x="734" y="73" class="hash-secondary">001d1250...f6af7bee</text>
+
+  <!-- Row: training -->
+  <line x1="562" y1="103" x2="896" y2="103" class="row-sep"/>
+  <text x="578" y="94" class="label-stage">training</text>
+  <text x="638" y="94" class="hash-primary">36b34d87</text>
+  <text x="734" y="94" class="hash-secondary">459ead09...13bf7dfc</text>
+
+  <!-- Row: quant -->
+  <line x1="562" y1="127" x2="896" y2="127" class="row-sep"/>
+  <text x="578" y="118" class="label-stage">quant</text>
+  <text x="638" y="118" class="hash-primary">8c78bae6</text>
+  <text x="734" y="118" class="hash-secondary">45d6f06a...d3703942</text>
+
+  <!-- Row: deploy -->
+  <line x1="562" y1="151" x2="896" y2="151" class="row-sep"/>
+  <text x="578" y="142" class="label-stage">deploy</text>
+  <text x="638" y="142" class="hash-primary">32296bbc</text>
+  <text x="734" y="142" class="hash-secondary">342c91ba...1f69d17f</text>
+
+  <!-- Row: inference -->
+  <line x1="562" y1="175" x2="896" y2="175" class="row-sep"/>
+  <text x="578" y="166" class="label-stage">inference</text>
+  <text x="638" y="166" class="hash-primary">48f4eceb</text>
+  <text x="734" y="166" class="hash-secondary">c0eec79a...178c0138</text>
+
+  <!-- Row: monitor -->
+  <line x1="562" y1="199" x2="896" y2="199" class="row-sep"/>
+  <text x="578" y="190" class="label-stage">monitor</text>
+  <text x="638" y="190" class="hash-primary">da7f4999</text>
+  <text x="734" y="190" class="hash-secondary">2d875a63...d1f9eb8a</text>
+
+  <!-- Row: verify -->
+  <line x1="562" y1="223" x2="896" y2="223" class="row-sep"/>
+  <text x="578" y="214" class="label-stage">verify</text>
+  <text x="638" y="214" class="hash-primary">33e41fca</text>
+  <text x="734" y="214" class="hash-secondary">aa25c405...e85ae876</text>
+
+  <line x1="562" y1="237" x2="896" y2="237" class="row-sep"/>
+
+  <!-- Panel footer -->
+  <rect x="562" y="237" width="334" height="71" fill="#0d0d0d" rx="0"/>
+  <rect x="562" y="296" width="334" height="12" fill="#0d0d0d" rx="3"/>
+  <text x="578" y="257" class="label-compiler" style="fill:#2e2e2e; font-size:8px; letter-spacing:0.14em">SHA-256 · FIPS 180-4</text>
+  <text x="578" y="271" class="label-compiler" style="fill:#252525; font-size:8px; letter-spacing:0.14em">PIPELINE STAGE COMMITMENTS</text>
+  <text x="578" y="285" class="label-compiler" style="fill:#1e1e1e; font-size:8px; letter-spacing:0.14em">Q16.16 FIXED-POINT · PURE C99</text>
+
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- RESULT BANNER                                         -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <rect x="24" y="324" width="872" height="56" rx="3" class="result-bg"/>
+  <rect x="24" y="324" width="872" height="56" rx="3" class="result-border"/>
+  <!-- Accent left bar -->
+  <rect x="24" y="324" width="3" height="56" rx="1" fill="#00d4aa" opacity="0.8"/>
+
+  <!-- Left: verdict -->
+  <text x="48" y="344" class="result-label">Cryptographic Verification</text>
+  <text x="48" y="362" class="result-main">Bit-identical: <tspan class="result-yes">YES  ✓</tspan></text>
+
+  <!-- Centre: context -->
+  <text x="460" y="344" class="result-sub" style="text-anchor:middle; font-size:9px">Different OS · Different compiler · Same committed outputs</text>
+  <text x="460" y="362" class="result-label" style="text-anchor:middle; opacity:0.25">7 pipeline stages · SHA-256 · FIPS 180-4</text>
+
+  <!-- Right: platform summary -->
+  <text x="880" y="344" class="result-label" style="text-anchor:end; opacity:0.35">Linux GCC 12.2.0</text>
+  <text x="880" y="362" class="result-label" style="text-anchor:end; opacity:0.35">macOS Apple Clang</text>
+
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- ONE-LINER — bottom                                    -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="460" y="410" text-anchor="middle">
+    <tspan class="oneliner">certifiable-* is the first ML pipeline that </tspan><tspan class="oneliner-em">proves what it computes</tspan><tspan class="oneliner"> — cryptographically, across every platform, forever.</tspan>
+  </text>
+
+</svg>
