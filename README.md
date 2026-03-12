@@ -5,9 +5,9 @@
 <p align="center">
   <a href="https://github.com/SpeyTech/certifiable-data/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build"></a>
   <a href="https://github.com/SpeyTech/certifiable-bench"><img src="https://img.shields.io/badge/tests-11%2C840%20passing-brightgreen" alt="Tests"></a>
+  <a href="docs/CERTIFICATION-GUIDE.md"><img src="https://img.shields.io/badge/DO--178C%20%7C%20IEC%2062304%20%7C%20ISO%2026262-certification%20guidance-blue" alt="Certification"></a>
+  <a href="https://www.gov.uk/government/publications/patents"><img src="https://img.shields.io/badge/UK%20Patent-GB2521625.0-blue" alt="Patent"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue" alt="License"></a>
-  <a href="https://www.gov.uk/government/publications/patents"><img src="https://img.shields.io/badge/patent-GB2521625.0-blue" alt="Patent"></a>
-  <a href="docs/CERTIFICATION-GUIDE.md"><img src="https://img.shields.io/badge/DO--178C%20%7C%20IEC%2062304%20%7C%20ISO%2026262-alignment%20documented-blue" alt="Certification"></a>
 </p>
 
 ---
@@ -49,7 +49,7 @@ Verified: macOS x86_64 / Apple Clang  ✓
 All 7 stages: PASS
 ```
 
-These hashes are not illustrative. They are the actual cryptographic commitments produced by the pipeline on two separate platforms, compilers, and operating systems. They match to the bit.
+These hashes are not illustrative. They are the actual cryptographic commitments produced by the pipeline on two independent platforms, compilers, and operating systems. They match to the bit.
 
 ---
 
@@ -57,7 +57,7 @@ These hashes are not illustrative. They are the actual cryptographic commitments
 
 Standard ML infrastructure is built for research, where approximately correct is good enough. In aerospace, medical devices, and autonomous systems, it is not.
 
-The regulators asking these questions don't have good answers yet:
+The regulators asking these questions do not yet have reliable answers:
 
 - How do you prove the deployed model is exactly what was certified?
 - How do you show the training data was processed correctly?
@@ -77,7 +77,7 @@ Standard ML pipelines are workflows. certifiable-\* is a supply chain. Every sta
 
 ## The Chain
 
-Each arrow carries a cryptographic commitment. The output of every stage is the input lock of the next. This is not a pipeline diagram — it is a proof of custody.
+Each arrow carries a cryptographic commitment. Every stage binds the next to its exact inputs. This is not a pipeline diagram — it is a proof of custody.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -85,7 +85,7 @@ Each arrow carries a cryptographic commitment. The output of every stage is the 
 │  Deterministic loading · Q16.16 normalisation · Feistel shuffle             │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
-                            M_data: Merkle root of dataset
+                      [ M_data: Merkle root of dataset ]
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -93,7 +93,7 @@ Each arrow carries a cryptographic commitment. The output of every stage is the 
 │  Fixed-point SGD · Counter-based PRNG · Neumaier reduction                  │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
-                           H_train: Training chain hash
+                       [ H_train: Training chain hash ]
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -101,7 +101,7 @@ Each arrow carries a cryptographic commitment. The output of every stage is the 
 │  FP32 → Q16.16 · Formal error bounds · Lipschitz propagation                │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
-                           H_cert: Quantisation certificate
+                       [ H_cert: Quantisation certificate ]
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -109,7 +109,7 @@ Each arrow carries a cryptographic commitment. The output of every stage is the 
 │  CBF bundle · Merkle attestation · JCS manifest · Target binding            │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
-                              R: Release bundle hash
+                          [ R: Release bundle hash ]
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -117,7 +117,7 @@ Each arrow carries a cryptographic commitment. The output of every stage is the 
 │  Static allocation · Fixed-point forward pass · No dynamic dispatch         │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
-                           H_pred: Inference output hash
+                        [ H_pred: Inference output hash ]
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -125,7 +125,7 @@ Each arrow carries a cryptographic commitment. The output of every stage is the 
 │  Drift detection · COE policy · Activation envelope · Audit ledger          │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
-                           H_audit: Monitor chain hash
+                        [ H_audit: Monitor chain hash ]
                                       │
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -138,7 +138,7 @@ Each arrow carries a cryptographic commitment. The output of every stage is the 
 
 ## The DVM
 
-The Deterministic Virtual Machine (DVM) is the execution contract that makes the chain possible. It defines the only legal arithmetic semantics across all certifiable-\* projects: integer-only operations, saturating overflow, fixed-topology reduction, and counter-based pseudo-random number generation with no hidden state. Any platform that implements the DVM contract produces identical outputs from identical inputs. The bit-identity guarantee is not a property of the hardware — it is a property of the contract.
+The Deterministic Virtual Machine (DVM) is the execution contract that makes the chain possible. It defines the only legal arithmetic semantics across all certifiable-\* projects: integer-only operations, saturating overflow, fixed-topology reduction, and counter-based pseudo-random number generation with no hidden state. Any platform that implements the DVM contract produces identical outputs from identical inputs. Bit identity is not a property of the hardware — it is a property of the contract.
 
 ---
 
@@ -152,7 +152,7 @@ Every certifiable-\* component satisfies three theorems by construction:
 | **Bounded Error** | Quantisation error saturates and does not accumulate | Worst-case behaviour is known, bounded, and provable before deployment |
 | **Auditability** | Any operation is verifiable in O(1) time via Merkle path | A six-month-old inference result can be verified against its training data in constant time |
 
-These are not design goals. They are enforced invariants. Any deviation is a compilation failure.
+These are not design goals. They are enforced invariants. Any violation is a compilation failure.
 
 ---
 
@@ -163,7 +163,7 @@ These are not design goals. They are enforced invariants. Any deviation is a com
 | Bit-identical across platforms | ✗ | ✗ | ✗ | ✓ |
 | Cryptographic chain of custody | ✗ | ✗ | ✗ | ✓ |
 | Independently replayable audit | ✗ | ✗ | Partial | ✓ |
-| Formal error bounds on quantisation | ✗ | ✗ | ✗ | ✓ |
+| Formal quantisation error bounds | ✗ | ✗ | ✗ | ✓ |
 | DO-178C / IEC 62304 / ISO 26262 alignment | ✗ | ✗ | ✗ | ✓ |
 | Zero dynamic allocation at inference | ✗ | ✗ | ✗ | ✓ |
 
@@ -207,7 +207,7 @@ Measured on reference hardware (Intel Core i7-12700, GCC 12.2.0, -O2):
 | MLP 784→128→10 | 101,770 | 847 μs |
 | CNN 3×32×32 | 62,006 | 1.2 ms |
 
-No probabilistic WCET. No measurement-based approximation. Deterministic control flow from first principles.
+No probabilistic WCET. No measurement-based approximation. Deterministic control flow from first principles. No speculative execution paths. No hidden runtime variability.
 
 ---
 
@@ -224,11 +224,13 @@ No probabilistic WCET. No measurement-based approximation. Deterministic control
 | [certifiable-verify](https://github.com/SpeyTech/certifiable-verify) | Full pipeline replay, cross-platform hash comparison, bit-identity proof | 10 suites | ✅ Released |
 | [certifiable-harness](https://github.com/SpeyTech/certifiable-harness) | End-to-end cross-platform integration test | 4 suites | ✅ Released |
 | [certifiable-bench](https://github.com/SpeyTech/certifiable-bench) | Performance validation across x86, ARM, and RISC-V targets | 11,840 | ✅ Released |
-| [certifiable-build](https://github.com/SpeyTech/certifiable-build) | Shared build infrastructure — build2 toolchain, CI scaffolding, Tenstorrent dev environment | — | ✅ Released |
+| [certifiable-build](https://github.com/SpeyTech/certifiable-build) | Shared build infrastructure — multi-toolchain support (CMake / build2), CI scaffolding, Tenstorrent dev environment | — | ✅ Released |
 
 ---
 
 ## Quick Start
+
+The harness verifies cross-platform determinism and the cryptographic proof chain. Run it on any DVM-compliant platform — the hashes will match.
 
 ```bash
 # Clone and verify the full pipeline in under five minutes
@@ -245,10 +247,13 @@ To build an individual component:
 ```bash
 git clone https://github.com/SpeyTech/certifiable-inference
 cd certifiable-inference
-make setup && make config && make build && make test
+mkdir build && cd build
+cmake ..
+make
+make test
 ```
 
-Components that include [certifiable-build](https://github.com/SpeyTech/certifiable-build) use the four-step `make setup/config/build/test` pattern. certifiable-harness builds with CMake 3.10+, GCC or Clang, C99. No external dependencies.
+All components build with CMake 3.10+, GCC or Clang, C99. No external dependencies. Components migrated to [certifiable-build](https://github.com/SpeyTech/certifiable-build) additionally support the four-step `make setup/config/build/test` pattern.
 
 ---
 
@@ -256,9 +261,11 @@ Components that include [certifiable-build](https://github.com/SpeyTech/certifia
 
 certifiable-\* is designed for certification under DO-178C (aerospace), IEC 62304 (medical devices), and ISO 26262 (automotive). Each standard asks the same fundamental question in different language: can you prove that what you deployed is what you certified?
 
-The cryptographic chain of custody answers that question directly. The mathematical specifications (CT-MATH, CI-MATH, CD-MATH per component) provide the formal foundations required by DAL A / Class C / ASIL-D assessors. The SRS documents provide traceability from requirement to implementation to test.
+The cryptographic chain of custody provides the evidence required to answer that question. The mathematical specifications (CT-MATH, CI-MATH, CD-MATH per component) provide the formal foundations required by DAL A / Class C / ASIL-D assessors. The SRS documents provide traceability from requirement to implementation to test.
 
 Full certification guidance — including artefact checklists, assessor Q&A, and standard-specific mapping — is in [docs/CERTIFICATION-GUIDE.md](docs/CERTIFICATION-GUIDE.md).
+
+
 
 ---
 
@@ -278,13 +285,13 @@ aarch64 and riscv64 verification is in progress with Tenstorrent and Semper Vict
 
 ## Licensing, Patent, and About
 
-**License:** Dual licensed. Open source under GPL-3.0. Commercial licensing available for safety-critical deployments — contact william@speytech.com.
+**License:** Dual licensed. Open source under GPL-3.0. Commercial licensing available for safety-critical deployments — contact william@fstopify.com.
 
 **Patent:** Built on the Murray Deterministic Computing Platform (MDCP), UK Patent GB2521625.0.
 
 **Standards:** Pure C99. MISRA-C 2012 aligned. Zero dynamic allocation. No floating-point at runtime.
 
-certifiable-\* was conceived by observing mycorrhizal networks in an orchard in the Scottish Highlands — the insight that a forest shares nutrients through an unbroken underground chain, and that any node in that chain can verify its connection to every other node without trusting a central authority. The same principle governs this pipeline.
+certifiable-\* was conceived by observing mycorrhizal networks in an orchard in the Scottish Highlands — the observation that a forest shares nutrients through an unbroken underground network, and that any node in that network can verify its connection to every other node without trusting a central authority. The same principle governs this pipeline.
 
 Built by [SpeyTech](https://speytech.com) in the Scottish Highlands.
 
