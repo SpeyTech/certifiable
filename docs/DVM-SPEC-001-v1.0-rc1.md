@@ -103,7 +103,7 @@ Deterministic systems constructed on conforming DVM implementations. Examples in
 
 Implementations MUST conform to the specification layer. Applications MUST depend only on conforming implementations.
 
-![DVM Layered Specification Model](dvm-01-layered-architecture.svg)
+![DVM Layered Specification Model](images/dvm-01-layered-architecture.svg)
 
 ---
 
@@ -281,7 +281,7 @@ Optional fields MUST be explicitly encoded. Implicit omission of fields is forbi
 **Deterministic Padding for Bounded Payloads**
 Canonical structures MAY contain fixed-capacity buffers. If a logical payload occupies less than the capacity of a fixed-size structure, all remaining unused bytes MUST be explicitly initialised to zero (`0x00`) or another predefined deterministic byte value. Uninitialized stack or heap memory SHALL NEVER appear in canonical state representations.
 
-![Canonical State Memory Layout](dvm-02-canonical-memory-layout.svg)
+![Canonical State Memory Layout](images/dvm-02-canonical-memory-layout.svg)
 
 ### 4.3 Primitive Types
 
@@ -432,7 +432,7 @@ This split provides two independently auditable records:
 
 The Ingress Oracle operates outside the deterministic domain of the DVM. Its behaviour must therefore be independently specified for each deployment to ensure reproducibility of canonical state generation. Deployments SHOULD provide an Oracle Specification document describing the oracle's normalisation and quantisation rules, their deterministic properties, and the verification strategy for oracle conformance.
 
-![Ingress Oracle Boundary](dvm-03-ingress-oracle-boundary.svg)
+![Ingress Oracle Boundary](images/dvm-03-ingress-oracle-boundary.svg)
 
 ### 6.3 Domain-Specific Oracles
 
@@ -521,7 +521,7 @@ That is, any conforming implementation given the same initial canonical state an
 
 **Proof sketch:** Each $L_t$ is a deterministic function of $\text{tag}_{\text{ledger}}$, $L_{t-1}$, and $\text{commit}(s_t)$. Each $\text{commit}(s_t)$ is a deterministic function of $s_t$. Each $s_t$ is produced by $F_t(s_{t-1})$, which by the determinism contract (§3.5) is bit-identical across conforming implementations. Induction from $L_0$ therefore guarantees $C' = C$.
 
-![Cryptographic Commitment Chain and Replay Theorem](dvm-04-commitment-chain.svg)
+![Cryptographic Commitment Chain and Replay Theorem](images/dvm-04-commitment-chain.svg)
 
 This theorem is the core verifiability guarantee of the DVM. It states that the system's computational history is independently auditable: any party holding $s_0$ and $P$ can verify any commitment chain produced by any conforming implementation.
 
@@ -593,7 +593,7 @@ $F_n$ may transform the fault vector according to documented deterministic rules
 
 Under no circumstances SHALL a computation silently clear or ignore a fault vector. Fault state transitions MUST be observable within canonical state.
 
-![Mathematical Closure and Fault Propagation](dvm-05-fault-propagation.svg)
+![Mathematical Closure and Fault Propagation](images/dvm-05-fault-propagation.svg)
 
 The chosen fault propagation strategy for each computation MUST be declared in the implementation documentation and is subject to conformance verification (§9).
 
