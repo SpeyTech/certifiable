@@ -1,0 +1,62 @@
+<svg width="680" height="380" viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif">
+<text x="340" y="18" text-anchor="middle" font-size="12" fill="#5F5E5A">Canonical state memory layout — §4.2</text>
+
+<!-- Column headers -->
+<text x="175" y="44" text-anchor="middle" font-size="14" font-weight="500" fill="#2C2C2A">Standard (compiler-padded)</text>
+<text x="505" y="44" text-anchor="middle" font-size="14" font-weight="500" fill="#2C2C2A">DVM canonical (byte-packed)</text>
+<line x1="340" y1="30" x2="340" y2="370" stroke="#D3D1C7" stroke-width="0.5" stroke-dasharray="4 4"/>
+
+<!-- LEFT: padded layout -->
+<!-- uint8 field -->
+<rect x="60" y="56" width="80" height="34" rx="4" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="100" y="73" text-anchor="middle" font-size="12" fill="#4A1B0C" dominant-baseline="central">uint8</text>
+<!-- padding -->
+<rect x="140" y="56" width="72" height="34" rx="4" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="176" y="66" text-anchor="middle" font-size="11" fill="#501313">padding</text>
+<text x="176" y="80" text-anchor="middle" font-size="11" fill="#501313">7 bytes</text>
+<!-- uint64 -->
+<rect x="60" y="98" width="200" height="34" rx="4" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="160" y="115" text-anchor="middle" font-size="12" fill="#4A1B0C" dominant-baseline="central">uint64 (8 bytes)</text>
+<!-- int32 -->
+<rect x="60" y="140" width="100" height="34" rx="4" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="110" y="157" text-anchor="middle" font-size="12" fill="#4A1B0C" dominant-baseline="central">int32 (4 b)</text>
+<!-- padding -->
+<rect x="160" y="140" width="100" height="34" rx="4" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="210" y="150" text-anchor="middle" font-size="11" fill="#501313">padding</text>
+<text x="210" y="164" text-anchor="middle" font-size="11" fill="#501313">4 bytes</text>
+<!-- uint64 -->
+<rect x="60" y="182" width="200" height="34" rx="4" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="160" y="199" text-anchor="middle" font-size="12" fill="#4A1B0C" dominant-baseline="central">uint64 (8 bytes)</text>
+
+<text x="160" y="240" text-anchor="middle" font-size="12" fill="#5F5E5A">Total: 31 bytes declared</text>
+<text x="160" y="256" text-anchor="middle" font-size="12" fill="#5F5E5A">+ 11 bytes hidden padding</text>
+<rect x="80" y="265" width="160" height="28" rx="6" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="160" y="279" text-anchor="middle" font-size="12" fill="#501313" dominant-baseline="central">Non-deterministic content</text>
+
+<!-- RIGHT: byte-packed layout -->
+<rect x="380" y="56" width="80" height="34" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="420" y="73" text-anchor="middle" font-size="12" fill="#04342C" dominant-baseline="central">uint8</text>
+<rect x="460" y="56" width="200" height="34" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="560" y="73" text-anchor="middle" font-size="12" fill="#04342C" dominant-baseline="central">uint64 (8 bytes, LE)</text>
+<rect x="380" y="98" width="200" height="34" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="480" y="115" text-anchor="middle" font-size="12" fill="#04342C" dominant-baseline="central">uint64 (continued)</text>
+<rect x="380" y="140" width="100" height="34" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="430" y="157" text-anchor="middle" font-size="12" fill="#04342C" dominant-baseline="central">int32 (4 b)</text>
+<rect x="480" y="140" width="200" height="34" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="580" y="157" text-anchor="middle" font-size="12" fill="#04342C" dominant-baseline="central">uint64 (8 bytes, LE)</text>
+<rect x="380" y="182" width="200" height="34" rx="4" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="480" y="199" text-anchor="middle" font-size="12" fill="#04342C" dominant-baseline="central">uint64 (continued)</text>
+
+<text x="500" y="240" text-anchor="middle" font-size="12" fill="#5F5E5A">Total: 21 bytes</text>
+<text x="500" y="256" text-anchor="middle" font-size="12" fill="#5F5E5A">no padding, no gaps</text>
+<rect x="400" y="265" width="160" height="28" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="480" y="279" text-anchor="middle" font-size="12" fill="#04342C" dominant-baseline="central">Bit-identical across platforms</text>
+
+<!-- Legend -->
+<rect x="60" y="306" width="20" height="14" rx="2" fill="#D85A30" opacity="0.7"/>
+<text x="88" y="314" font-size="12" fill="#5F5E5A" dominant-baseline="central">compiler padding (undefined bytes)</text>
+<rect x="280" y="306" width="20" height="14" rx="2" fill="#1D9E75" opacity="0.7"/>
+<text x="308" y="314" font-size="12" fill="#5F5E5A" dominant-baseline="central">declared field bytes</text>
+
+<text x="340" y="350" text-anchor="middle" font-size="11" fill="#5F5E5A">All multi-byte values use little-endian encoding. Unused capacity zeroed (§4.2).</text>
+</svg>

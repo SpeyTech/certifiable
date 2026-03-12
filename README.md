@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/header.svg" alt="certifiable-* cross-platform bit-identity proof" width="100%">
+  <img src="docs/images/header.svg" alt="certifiable-* cross-platform bit-identity proof" width="100%">
 </p>
 
 <p align="center">
