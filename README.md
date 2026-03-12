@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://github.com/SpeyTech/certifiable-data/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build"></a>
-  <a href="https://github.com/SpeyTech/certifiable-bench"><img src="https://img.shields.io/badge/tests-11%2C840%20passing-brightgreen" alt="Tests"></a>
+  <a href="https://github.com/SpeyTech/certifiable-bench"><img src="https://img.shields.io/badge/tests-13%2C000%2B%20passing-brightgreen" alt="Tests"></a>
   <a href="docs/CERTIFICATION-GUIDE.md"><img src="https://img.shields.io/badge/DO--178C%20%7C%20IEC%2062304%20%7C%20ISO%2026262-certification%20guidance-blue" alt="Certification"></a>
   <a href="https://www.gov.uk/government/publications/patents"><img src="https://img.shields.io/badge/UK%20Patent-GB2521625.0-blue" alt="Patent"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue" alt="License"></a>
@@ -223,7 +223,7 @@ No probabilistic WCET. No measurement-based approximation. Deterministic control
 | [certifiable-monitor](https://github.com/SpeyTech/certifiable-monitor) | Runtime drift detection, COE policy, activation envelope, audit ledger | 253 | ✅ Released |
 | [certifiable-verify](https://github.com/SpeyTech/certifiable-verify) | Full pipeline replay, cross-platform hash comparison, bit-identity proof | 10 suites | ✅ Released |
 | [certifiable-harness](https://github.com/SpeyTech/certifiable-harness) | End-to-end cross-platform integration test | 4 suites | ✅ Released |
-| [certifiable-bench](https://github.com/SpeyTech/certifiable-bench) | Performance validation across x86, ARM, and RISC-V targets | 11,840 | ✅ Released |
+| [certifiable-bench](https://github.com/SpeyTech/certifiable-bench) | Performance validation across x86, ARM, and RISC-V targets | 11,840 assertions | ✅ Released |
 | [certifiable-build](https://github.com/SpeyTech/certifiable-build) | Shared build infrastructure — multi-toolchain support (CMake / build2), CI scaffolding, Tenstorrent dev environment | — | ✅ Released |
 
 ---
