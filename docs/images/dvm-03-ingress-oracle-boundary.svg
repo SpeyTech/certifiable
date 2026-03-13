@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 610" width="100%" style="background-color: #ffffff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 580" width="100%" style="background-color: #ffffff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#8892B0" />
@@ -11,103 +11,110 @@
   <text x="400" y="36" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">Ingress Oracle boundary — §6.2</text>
 
   <!--
-    Layout at 800px:
-    External env:  x=20  w=155  y=65  h=255   right=175
-    Oracle:        x=195 w=270  y=65  h=340   right=465
-      Steps (inner h=35, gap=12):
-        Step 1 Normalise:  inner y=72  mid=89.5  abs mid=65+89.5=154.5
-        Step 2 Encode:     inner y=119 mid=136.5 abs mid=65+136.5=201.5
-        Step 3 Commit:     inner y=166 mid=183.5 abs mid=65+183.5=248.5
-        Step 4 Emit:       inner y=213 mid=230.5 abs mid=65+230.5=295.5
-    Right evidence boxes: x=485 w=180
-      Ingress commit: centred on step 1 abs mid 154.5 → y=154.5-45=109.5 h=90
-      Canonical state: centred on step 4 abs mid 295.5 → y=295.5-55=240.5 h=110
-    Arrows: oracle right edge x=465 → evidence left x=485
-      → Ingress commit at y=154.5
-      → Canonical state at y=295.5
-    Env arrow → Oracle at y=195 (centre of env box content)
-    Oracle bottom → DVM exec: oracle bottom = 65+340=405, arrow to 435
-    DVM exec box: x=195 y=435 w=270 h=75
+    Three columns at 800px:
+      External env:  x=15   w=150  right=165
+      gap → Oracle:  x=180  w=270  right=450
+      gap → Evidence: x=465  w=185  right=650 (two stacked boxes)
+
+    Arrow env→oracle: y = env vertical centre
+    Oracle group translate(180, 62)
+      outer box h=310
+      Step pill h=38, gap=14
+        Step1: inner y=70  h=38  abs mid = 62+70+19 = 151
+        Step2: inner y=122 h=38  abs mid = 62+122+19 = 203
+        Step3: inner y=174 h=38  abs mid = 62+174+19 = 255
+        Step4: inner y=226 h=38  abs mid = 62+226+19 = 307
+
+    Evidence boxes (right of oracle):
+      Ingress commit: centred on Step1 abs mid 151 → y=151-45=106, h=90
+      Canonical state: centred on Step4 abs mid 307 → y=307-55=252, h=110
+
+    Arrows oracle right (x=450) → evidence left (x=463):
+      → y=151 (step1 mid)
+      → y=307 (step4 mid)
+
+    Oracle bottom = 62+310 = 372 → DVM exec arrow → y=400
+    DVM exec: translate(180, 400) w=270 h=70
   -->
 
-  <!-- External environment -->
-  <g transform="translate(20, 65)">
-    <rect width="155" height="255" rx="8" fill="#FFF5F3" stroke="#FDBA74" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="77"  y="30"  font-size="14" font-weight="bold" text-anchor="middle" fill="#9A3412">External</text>
-    <text x="77"  y="48"  font-size="14" font-weight="bold" text-anchor="middle" fill="#9A3412">environment</text>
-    <text x="77"  y="68"  font-size="13" font-style="italic" text-anchor="middle" fill="#C2410C">Nondeterministic</text>
-    <rect x="12" y="90"  width="131" height="36" rx="4" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
-    <text x="77"  y="112" font-size="12" text-anchor="middle" fill="#7C2D12">Sensors / clocks / feeds</text>
-    <rect x="12" y="138" width="131" height="36" rx="4" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
-    <text x="77"  y="160" font-size="12" text-anchor="middle" fill="#7C2D12">Raw bytes / floating-point</text>
+  <!-- External environment box -->
+  <g transform="translate(15, 62)">
+    <rect width="150" height="265" rx="8" fill="#FFF5F3" stroke="#FDBA74" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="75" y="28"  font-size="13" font-weight="bold" text-anchor="middle" fill="#9A3412">External</text>
+    <text x="75" y="46"  font-size="13" font-weight="bold" text-anchor="middle" fill="#9A3412">environment</text>
+    <text x="75" y="66"  font-size="12" font-style="italic" text-anchor="middle" fill="#C2410C">Nondeterministic</text>
+    <rect x="10" y="86"  width="130" height="38" rx="4" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
+    <text x="75" y="109" font-size="12" text-anchor="middle" fill="#7C2D12">Sensors / clocks / feeds</text>
+    <rect x="10" y="138" width="130" height="38" rx="4" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
+    <text x="75" y="161" font-size="12" text-anchor="middle" fill="#7C2D12">Raw bytes / floating-point</text>
   </g>
 
-  <!-- Arrow env → oracle at y=195 (65 + ~130 centre of env content) -->
-  <path d="M 175 195 L 192 195" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Arrow env → oracle: env right=165, oracle left=180, y = 62+132 = 194 (centre of env) -->
+  <path d="M 165 194 L 177 194" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Ingress Oracle -->
-  <g transform="translate(195, 65)">
-    <rect width="270" height="340" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="135" y="30"  font-size="14" font-weight="bold" text-anchor="middle" fill="#4C1D95">Ingress Oracle</text>
-    <text x="135" y="50"  font-size="12" font-family="monospace" text-anchor="middle" fill="#6D28D9">O : E → (s ∈ S, L_ingress)</text>
+  <!-- Ingress Oracle group: translate(180, 62) -->
+  <g transform="translate(180, 62)">
+    <rect width="270" height="310" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="135" y="28"  font-size="14" font-weight="bold" text-anchor="middle" fill="#4C1D95">Ingress Oracle</text>
+    <text x="135" y="48"  font-size="12" font-family="monospace" text-anchor="middle" fill="#6D28D9">O : E → (s ∈ S, L_ingress)</text>
 
-    <!-- Step 1 inner y=72 h=35 mid=89.5 abs=154.5 -->
-    <rect x="20" y="72"  width="230" height="35" rx="4" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
-    <text x="135" y="94"  font-size="12" text-anchor="middle" fill="#4C1D95">1. Normalise and quantise</text>
+    <!-- Step 1: inner y=70 h=38  abs mid=151 -->
+    <rect x="18" y="70"  width="234" height="38" rx="4" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
+    <text x="135" y="94"  font-size="13" text-anchor="middle" fill="#4C1D95">1. Normalise and quantise</text>
 
-    <!-- Step 2 inner y=119 h=35 mid=136.5 abs=201.5 -->
-    <rect x="20" y="119" width="230" height="35" rx="4" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
-    <text x="135" y="141" font-size="12" text-anchor="middle" fill="#4C1D95">2. Encode to §4.3 primitives</text>
+    <!-- Step 2: inner y=122 h=38  abs mid=203 -->
+    <rect x="18" y="122" width="234" height="38" rx="4" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
+    <text x="135" y="146" font-size="13" text-anchor="middle" fill="#4C1D95">2. Encode to §4.3 primitives</text>
 
-    <!-- Step 3 inner y=166 h=35 mid=183.5 abs=248.5 -->
-    <rect x="20" y="166" width="230" height="35" rx="4" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
-    <text x="135" y="188" font-size="12" text-anchor="middle" fill="#4C1D95">3. Commit L_ingress</text>
+    <!-- Step 3: inner y=174 h=38  abs mid=255 -->
+    <rect x="18" y="174" width="234" height="38" rx="4" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
+    <text x="135" y="198" font-size="13" text-anchor="middle" fill="#4C1D95">3. Commit L_ingress</text>
 
-    <!-- Step 4 inner y=213 h=35 mid=230.5 abs=295.5 -->
-    <rect x="20" y="213" width="230" height="35" rx="4" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
-    <text x="135" y="235" font-size="12" text-anchor="middle" fill="#4C1D95">4. Emit canonical state s</text>
+    <!-- Step 4: inner y=226 h=38  abs mid=307 -->
+    <rect x="18" y="226" width="234" height="38" rx="4" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
+    <text x="135" y="250" font-size="13" text-anchor="middle" fill="#4C1D95">4. Emit canonical state s</text>
   </g>
 
-  <!-- Arrow step 1 → Ingress commitment at abs y=154.5 -->
-  <path d="M 465 154.5 L 482 154.5" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Arrow step1 abs y=151: oracle right x=450 → evidence left x=463 -->
+  <path d="M 450 151 L 462 151" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Arrow step 4 → Canonical state at abs y=295.5 -->
-  <path d="M 465 295.5 L 482 295.5" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Arrow step4 abs y=307 -->
+  <path d="M 450 307 L 462 307" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Ingress commitment: centred on 154.5 → y=109 h=90 -->
-  <g transform="translate(485, 109)">
-    <rect width="180" height="90" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="90" y="30"  font-size="13" font-weight="bold" text-anchor="middle" fill="#065F46">Ingress commitment</text>
-    <text x="90" y="54"  font-size="13" font-family="monospace" text-anchor="middle" fill="#047857">L_ingress</text>
-    <text x="90" y="74"  font-size="11" font-style="italic" text-anchor="middle" fill="#064E3B">What the world provided</text>
+  <!-- Ingress commitment: centred on y=151 → y=106 h=90 -->
+  <g transform="translate(465, 106)">
+    <rect width="185" height="90" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="92" y="28"  font-size="13" font-weight="bold" text-anchor="middle" fill="#065F46">Ingress commitment</text>
+    <text x="92" y="52"  font-size="14" font-family="monospace" text-anchor="middle" fill="#047857">L_ingress</text>
+    <text x="92" y="72"  font-size="12" font-style="italic" text-anchor="middle" fill="#064E3B">What the world provided</text>
   </g>
 
-  <!-- Canonical state: centred on 295.5 → y=240 h=110 -->
-  <g transform="translate(485, 240)">
-    <rect width="180" height="110" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="90" y="30"  font-size="13" font-weight="bold" text-anchor="middle" fill="#065F46">Canonical state</text>
-    <text x="90" y="56"  font-size="13" font-family="monospace" text-anchor="middle" fill="#047857">s ∈ S</text>
-    <text x="90" y="80"  font-size="12" text-anchor="middle" fill="#064E3B">DVM execution input</text>
+  <!-- Canonical state: centred on y=307 → y=252 h=110 -->
+  <g transform="translate(465, 252)">
+    <rect width="185" height="110" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="92" y="28"  font-size="13" font-weight="bold" text-anchor="middle" fill="#065F46">Canonical state</text>
+    <text x="92" y="54"  font-size="14" font-family="monospace" text-anchor="middle" fill="#047857">s ∈ S</text>
+    <text x="92" y="76"  font-size="12" text-anchor="middle" fill="#064E3B">DVM execution input</text>
   </g>
 
-  <!-- Arrow oracle bottom (65+340=405) → DVM exec top (435) -->
-  <path d="M 330 405 L 330 433" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Arrow oracle bottom (62+310=372) → DVM exec (400) -->
+  <path d="M 315 372 L 315 398" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- DVM execution box -->
-  <g transform="translate(195, 435)">
-    <rect width="270" height="75" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="135" y="30"  font-size="14" font-weight="bold" text-anchor="middle" fill="#4C1D95">DVM execution</text>
-    <text x="135" y="55"  font-size="13" text-anchor="middle" fill="#6D28D9"><tspan font-style="italic">Deterministic</tspan> — <tspan font-family="monospace">F : S → S</tspan></text>
+  <!-- DVM execution -->
+  <g transform="translate(180, 400)">
+    <rect width="270" height="70" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="135" y="28"  font-size="14" font-weight="bold" text-anchor="middle" fill="#4C1D95">DVM execution</text>
+    <text x="135" y="52"  font-size="13" text-anchor="middle" fill="#6D28D9"><tspan font-style="italic">Deterministic</tspan> — <tspan font-family="monospace">F : S → S</tspan></text>
   </g>
 
   <!-- Zone labels -->
-  <line x1="20"  y1="535" x2="185" y2="535" stroke="#E5E7EB" stroke-width="2" stroke-dasharray="4"/>
-  <text x="102"  y="552" font-size="12" text-anchor="middle" fill="#6B7280">Nondeterministic zone</text>
+  <line x1="15"  y1="490" x2="170" y2="490" stroke="#E5E7EB" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="92"   y="506" font-size="11" text-anchor="middle" fill="#6B7280">Nondeterministic zone</text>
 
-  <line x1="475" y1="535" x2="665" y2="535" stroke="#E5E7EB" stroke-width="2" stroke-dasharray="4"/>
-  <text x="570"  y="552" font-size="12" text-anchor="middle" fill="#6B7280">Evidence records</text>
+  <line x1="465" y1="490" x2="650" y2="490" stroke="#E5E7EB" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="557"  y="506" font-size="11" text-anchor="middle" fill="#6B7280">Evidence records</text>
 
   <!-- Footer -->
-  <text x="400" y="580" font-size="12" text-anchor="middle" fill="#111827"><tspan font-family="monospace" font-weight="bold">L_ingress</tspan> — what the world provided · <tspan font-weight="bold">Commitment chain</tspan> — what DVM computed</text>
-  <text x="400" y="598" font-size="12" font-style="italic" text-anchor="middle" fill="#374151">The Oracle boundary is the sole permitted entry point for external state (§3.4)</text>
+  <text x="400" y="534" font-size="12" text-anchor="middle" fill="#111827"><tspan font-family="monospace" font-weight="bold">L_ingress</tspan> — what the world provided · <tspan font-weight="bold">Commitment chain</tspan> — what DVM computed</text>
+  <text x="400" y="554" font-size="12" font-style="italic" text-anchor="middle" fill="#374151">The Oracle boundary is the sole permitted entry point for external state (§3.4)</text>
 </svg>
