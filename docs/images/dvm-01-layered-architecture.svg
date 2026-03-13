@@ -1,77 +1,72 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 580" width="100%" style="background-color: #ffffff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 530" width="100%" style="background-color: #ffffff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#8892B0" />
     </marker>
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.06" />
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.06" />
     </filter>
   </defs>
 
-  <text x="475" y="40" font-size="18" font-weight="600" text-anchor="middle" fill="#111827">DVM layered specification model — §1.4</text>
+  <text x="400" y="36" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">DVM layered specification model — §1.4</text>
 
   <!--
-    Three horizontal layers, each full-width, stacked vertically.
-    Layer boxes: x=40, w=870, centred at x=475
-    Spec:   y=65,  h=90
-    Impl:   y=215, h=90
-    App:    y=365, h=130  (three equal sub-boxes inside)
+    Three stacked layers, each x=30 w=740
+    Spec:   y=55  h=82
+    Impl:   y=195 h=82
+    App:    y=335 h=128  (three sub-boxes inside)
 
-    Arrows between layers: x=475, from bottom of upper to top of lower
-      Spec→Impl:  y=155 → y=205  (with label "MUST conform")
-      Impl→App:   y=305 → y=355  (with label "MUST depend only on conforming implementation")
+    Arrows at x=400:
+      Spec bottom y=137 → Impl top y=185
+      Impl bottom y=277 → App  top y=325
   -->
 
   <!-- Specification layer -->
-  <g transform="translate(40, 65)">
-    <rect width="870" height="90" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="435" y="32" font-size="16" font-weight="bold" text-anchor="middle" fill="#065F46">Specification layer</text>
-    <text x="435" y="58" font-size="14" text-anchor="middle" fill="#047857">DVM-SPEC-001 — normative invariants, arithmetic contracts, oracle boundary, conformance requirements</text>
-    <text x="435" y="78" font-size="13" font-style="italic" text-anchor="middle" fill="#064E3B">This document</text>
+  <g transform="translate(30, 55)">
+    <rect width="740" height="82" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="370" y="28" font-size="15" font-weight="bold" text-anchor="middle" fill="#065F46">Specification layer</text>
+    <text x="370" y="50" font-size="13" text-anchor="middle" fill="#047857">DVM-SPEC-001 — normative invariants, arithmetic contracts, oracle boundary, conformance requirements</text>
+    <text x="370" y="70" font-size="12" font-style="italic" text-anchor="middle" fill="#064E3B">This document</text>
   </g>
 
   <!-- Arrow Spec → Impl -->
-  <path d="M 475 155 L 475 205" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)" />
-  <text x="490" y="185" font-size="13" fill="#6B7280">MUST conform</text>
+  <path d="M 400 137 L 400 183" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="414" y="164" font-size="12" fill="#6B7280">MUST conform</text>
 
   <!-- Implementation layer -->
-  <g transform="translate(40, 215)">
-    <rect width="870" height="90" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="435" y="32" font-size="16" font-weight="bold" text-anchor="middle" fill="#4C1D95">Implementation layer</text>
-    <text x="435" y="58" font-size="14" font-family="monospace" text-anchor="middle" fill="#6D28D9">libdvm (C99) — dvm_* primitives · Q16.16 arithmetic · SHA-256 commitments · ChaCha20 PRNG</text>
-    <text x="435" y="78" font-size="13" font-style="italic" text-anchor="middle" fill="#4C1D95">Planned reference implementation · independent implementations permitted if conformant (§9)</text>
+  <g transform="translate(30, 195)">
+    <rect width="740" height="82" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="370" y="28" font-size="15" font-weight="bold" text-anchor="middle" fill="#4C1D95">Implementation layer</text>
+    <text x="370" y="50" font-size="13" font-family="monospace" text-anchor="middle" fill="#6D28D9">libdvm (C99) — dvm_* primitives · Q16.16 arithmetic · SHA-256 commitments · ChaCha20 PRNG</text>
+    <text x="370" y="70" font-size="12" font-style="italic" text-anchor="middle" fill="#4C1D95">Planned reference implementation · independent implementations permitted if conformant (§9)</text>
   </g>
 
   <!-- Arrow Impl → App -->
-  <path d="M 475 305 L 475 355" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)" />
-  <text x="490" y="335" font-size="13" fill="#6B7280">MUST depend only on conforming implementation</text>
+  <path d="M 400 277 L 400 323" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="414" y="304" font-size="12" fill="#6B7280">MUST depend only on conforming implementation</text>
 
-  <!-- Application layer outer container -->
-  <g transform="translate(40, 365)">
-    <rect width="870" height="130" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="435" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#78350F">Application layer</text>
+  <!-- Application layer outer -->
+  <g transform="translate(30, 335)">
+    <rect width="740" height="128" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="370" y="26" font-size="15" font-weight="bold" text-anchor="middle" fill="#78350F">Application layer</text>
 
-    <!-- Three sub-boxes: w=250 each, gap=30, total=810, left-pad=30 -->
-    <!-- certifiable-* -->
-    <rect x="30" y="42" width="250" height="72" rx="4" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
-    <text x="155" y="68" font-size="14" font-weight="bold" text-anchor="middle" fill="#78350F">certifiable-*</text>
-    <text x="155" y="88" font-size="13" text-anchor="middle" fill="#92400E">Safety-critical ML pipelines</text>
-    <text x="155" y="106" font-size="12" font-style="italic" text-anchor="middle" fill="#B45309">DO-178C · IEC 62304 · ISO 26262</text>
+    <!-- Three sub-boxes: each w=210, gap=25, total=680, left-pad=30 -->
+    <rect x="30"  y="40" width="210" height="74" rx="4" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+    <text x="135" y="63"  font-size="13" font-weight="bold" text-anchor="middle" fill="#78350F">certifiable-*</text>
+    <text x="135" y="82"  font-size="12" text-anchor="middle" fill="#92400E">Safety-critical ML pipelines</text>
+    <text x="135" y="100" font-size="11" font-style="italic" text-anchor="middle" fill="#B45309">DO-178C · IEC 62304 · ISO 26262</text>
 
-    <!-- certifiable-aero -->
-    <rect x="310" y="42" width="250" height="72" rx="4" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
-    <text x="435" y="68" font-size="14" font-weight="bold" text-anchor="middle" fill="#78350F">certifiable-aero</text>
-    <text x="435" y="88" font-size="13" text-anchor="middle" fill="#92400E">Avionics systems</text>
-    <text x="435" y="106" font-size="12" font-style="italic" text-anchor="middle" fill="#B45309">DO-178C</text>
+    <rect x="265" y="40" width="210" height="74" rx="4" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+    <text x="370" y="63"  font-size="13" font-weight="bold" text-anchor="middle" fill="#78350F">certifiable-aero</text>
+    <text x="370" y="82"  font-size="12" text-anchor="middle" fill="#92400E">Avionics systems</text>
+    <text x="370" y="100" font-size="11" font-style="italic" text-anchor="middle" fill="#B45309">DO-178C</text>
 
-    <!-- certifiable-fin -->
-    <rect x="590" y="42" width="250" height="72" rx="4" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
-    <text x="715" y="68" font-size="14" font-weight="bold" text-anchor="middle" fill="#78350F">certifiable-fin</text>
-    <text x="715" y="88" font-size="13" text-anchor="middle" fill="#92400E">Financial settlement</text>
-    <text x="715" y="106" font-size="12" font-style="italic" text-anchor="middle" fill="#B45309">Deterministic ledger</text>
+    <rect x="500" y="40" width="210" height="74" rx="4" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+    <text x="605" y="63"  font-size="13" font-weight="bold" text-anchor="middle" fill="#78350F">certifiable-fin</text>
+    <text x="605" y="82"  font-size="12" text-anchor="middle" fill="#92400E">Financial settlement</text>
+    <text x="605" y="100" font-size="11" font-style="italic" text-anchor="middle" fill="#B45309">Deterministic ledger</text>
   </g>
 
-  <!-- Footer -->
-  <text x="475" y="530" font-size="13" text-anchor="middle" fill="#6B7280">Implementations MAY vary internally. Canonical output MUST be bit-identical across all conforming implementations (§3.5).</text>
-  <text x="475" y="552" font-size="13" font-style="italic" text-anchor="middle" fill="#6B7280">Murray Deterministic Computing Platform — UK Patent GB2521625.0</text>
+  <text x="400" y="488" font-size="12" text-anchor="middle" fill="#6B7280">Implementations MAY vary internally. Canonical output MUST be bit-identical across all conforming implementations (§3.5).</text>
+  <text x="400" y="508" font-size="12" font-style="italic" text-anchor="middle" fill="#9CA3AF">Murray Deterministic Computing Platform — UK Patent GB2521625.0</text>
 </svg>

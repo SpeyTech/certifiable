@@ -1,139 +1,128 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 680" width="100%" style="background-color: #ffffff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="100%" style="background-color: #ffffff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#8892B0" />
     </marker>
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.06" />
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.06" />
     </filter>
   </defs>
 
-  <text x="475" y="40" font-size="18" font-weight="600" text-anchor="middle" fill="#111827">Mathematical closure and fault propagation — §3.2, §8.5</text>
+  <text x="400" y="36" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">Mathematical closure and fault propagation — §3.2, §8.5</text>
 
   <!--
-    Layout:
-      Valid state:    centred at x=475, y=65, w=280 h=70
-      Arrow down:     y=135 → y=165
-      DVM computation: centred x=475, y=165, w=340 h=80
-      Three diverging arrows from bottom of DVM box to three fault boxes
-      Three fault boxes at y=310, each w=240 h=80, gaps=25
-        Left:   x=55   centre=175
-        Centre: x=355  centre=475
-        Right:  x=655  centre=775
-      Arrows exit DVM box bottom at: left=355, centre=475, right=595  (y=245)
-        to: left centre=175, centre=475, right=775  (y=310)
-        L-bent paths to avoid crossing
-      Closure note: y=410
-      Arrows down to strategy boxes: y=420 → y=450
-      Three strategy boxes: y=450 h=100
-      Strategy context notes below.
+    Layout at 800px:
+    Valid state box:     centred x=400, y=55, w=260 h=64   right/bottom y=119
+    DVM computation box: centred x=400, y=150, w=310 h=76  bottom=226
+    Three fault boxes:   each w=205 gap=20
+      Left:   x=20   centre=122
+      Centre: x=295  centre=397
+      Right:  x=575  centre=677
+    DVM exit points for branches: x=310 (→left), x=400 (→centre), x=490 (→right)  y=226
+    Branch targets (top of fault boxes) y=295
+    L-bent paths:
+      Left:   M 310 226 L 310 280 L 122 280 L 122 293
+      Centre: M 400 226 L 400 293
+      Right:  M 490 226 L 490 280 L 677 280 L 677 293
+    Fault box bottoms y=375
+    Closure note y=392
+    Strategy arrows: fault bottom → strategy top  y=380→y=415
+    Strategy boxes y=415 h=96
+    Strategy bottom y=511
+    Footer y=540+
   -->
 
-  <!-- Valid canonical state (top, centred) -->
-  <g transform="translate(335, 65)">
-    <rect width="280" height="70" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="140" y="28" font-size="16" font-weight="bold" text-anchor="middle" fill="#065F46">s ∈ S</text>
-    <text x="140" y="52" font-size="14" text-anchor="middle" fill="#047857">Valid canonical state</text>
+  <!-- Valid state -->
+  <g transform="translate(270, 55)">
+    <rect width="260" height="64" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="130" y="26" font-size="15" font-weight="bold" text-anchor="middle" fill="#065F46">s ∈ S</text>
+    <text x="130" y="48" font-size="13" text-anchor="middle" fill="#047857">Valid canonical state</text>
   </g>
 
   <!-- Arrow down to DVM computation -->
-  <path d="M 475 135 L 475 163" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 400 119 L 400 148" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- DVM computation box -->
-  <g transform="translate(305, 165)">
-    <rect width="340" height="80" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="170" y="30" font-size="16" font-weight="bold" text-anchor="middle" fill="#4C1D95">F : S → S</text>
-    <text x="170" y="54" font-size="14" text-anchor="middle" fill="#6D28D9">DVM computation (§3.2)</text>
-    <text x="170" y="72" font-size="12" font-style="italic" text-anchor="middle" fill="#7C3AED">Total function — no undefined behaviour, no hardware traps</text>
+  <!-- DVM computation -->
+  <g transform="translate(245, 150)">
+    <rect width="310" height="76" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="155" y="28" font-size="15" font-weight="bold" text-anchor="middle" fill="#4C1D95">F : S → S</text>
+    <text x="155" y="50" font-size="13" text-anchor="middle" fill="#6D28D9">DVM computation (§3.2)</text>
+    <text x="155" y="68" font-size="11" font-style="italic" text-anchor="middle" fill="#7C3AED">Total function — no traps, no undefined behaviour</text>
   </g>
 
-  <!--
-    DVM box bottom = y=245
-    Three exit points: x=370 (left branch), x=475 (centre), x=580 (right branch)
-    Three fault box centres: x=175, x=475, x=775
-    Paths:
-      Left:   M 370 245 L 370 295 L 175 295 L 175 308   (L-bend to clear centre box)
-      Centre: M 475 245 L 475 308
-      Right:  M 580 245 L 580 295 L 775 295 L 775 308
-  -->
+  <!-- Three branching arrows from DVM box bottom (y=226) -->
+  <!-- Left branch → div/0 -->
+  <path d="M 310 226 L 310 278 L 122 278 L 122 293" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <text x="210" y="268" font-size="11" text-anchor="middle" fill="#9CA3AF">division by zero</text>
 
-  <!-- Left branch: division by zero -->
-  <path d="M 370 245 L 370 293 L 175 293 L 175 308" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-  <text x="260" y="282" font-size="12" text-anchor="middle" fill="#9CA3AF">division by zero</text>
+  <!-- Centre branch → overflow -->
+  <path d="M 400 226 L 400 293" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="418" y="262" font-size="11" text-anchor="start" fill="#9CA3AF">overflow</text>
 
-  <!-- Centre branch: overflow -->
-  <path d="M 475 245 L 475 308" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="504" y="278" font-size="12" text-anchor="start" fill="#9CA3AF">overflow</text>
+  <!-- Right branch → invalid domain -->
+  <path d="M 490 226 L 490 278 L 677 278 L 677 293" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <text x="590" y="268" font-size="11" text-anchor="middle" fill="#9CA3AF">invalid domain</text>
 
-  <!-- Right branch: invalid domain -->
-  <path d="M 580 245 L 580 293 L 775 293 L 775 308" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
-  <text x="690" y="282" font-size="12" text-anchor="middle" fill="#9CA3AF">invalid domain</text>
-
-  <!-- Three s_faulted boxes -->
-  <!-- Left -->
-  <g transform="translate(55, 310)">
-    <rect width="240" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="120" y="28" font-size="14" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">s_faulted ∈ S</text>
-    <text x="120" y="52" font-size="13" text-anchor="middle" fill="#92400E">Result saturated</text>
-    <text x="120" y="70" font-size="12" font-family="monospace" text-anchor="middle" fill="#B45309">division_by_zero flag set</text>
+  <!-- Three s_faulted boxes (y=295 h=80) -->
+  <g transform="translate(20, 295)">
+    <rect width="205" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="102" y="24"  font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">s_faulted ∈ S</text>
+    <text x="102" y="46"  font-size="12" text-anchor="middle" fill="#92400E">Result saturated</text>
+    <text x="102" y="64"  font-size="11" font-family="monospace" text-anchor="middle" fill="#B45309">division_by_zero flag</text>
   </g>
 
-  <!-- Centre -->
-  <g transform="translate(355, 310)">
-    <rect width="240" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="120" y="28" font-size="14" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">s_faulted ∈ S</text>
-    <text x="120" y="52" font-size="13" text-anchor="middle" fill="#92400E">Result saturated to INT_MAX</text>
-    <text x="120" y="70" font-size="12" font-family="monospace" text-anchor="middle" fill="#B45309">overflow flag set</text>
+  <g transform="translate(295, 295)">
+    <rect width="205" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="102" y="24"  font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">s_faulted ∈ S</text>
+    <text x="102" y="46"  font-size="12" text-anchor="middle" fill="#92400E">Saturated to INT_MAX</text>
+    <text x="102" y="64"  font-size="11" font-family="monospace" text-anchor="middle" fill="#B45309">overflow flag</text>
   </g>
 
-  <!-- Right -->
-  <g transform="translate(655, 310)">
-    <rect width="240" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="120" y="28" font-size="14" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">s_faulted ∈ S</text>
-    <text x="120" y="52" font-size="13" text-anchor="middle" fill="#92400E">Result clamped</text>
-    <text x="120" y="70" font-size="12" font-family="monospace" text-anchor="middle" fill="#B45309">invalid_domain flag set</text>
+  <g transform="translate(575, 295)">
+    <rect width="205" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="102" y="24"  font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">s_faulted ∈ S</text>
+    <text x="102" y="46"  font-size="12" text-anchor="middle" fill="#92400E">Result clamped</text>
+    <text x="102" y="64"  font-size="11" font-family="monospace" text-anchor="middle" fill="#B45309">invalid_domain flag</text>
   </g>
 
   <!-- Closure note -->
-  <text x="475" y="415" font-size="13" font-style="italic" text-anchor="middle" fill="#374151">All three paths produce a valid member of S — fault condition is a routed state transition, not a crash (§3.2)</text>
+  <text x="400" y="398" font-size="12" font-style="italic" text-anchor="middle" fill="#374151">All three paths produce a valid member of S — fault condition is a routed state transition, not a crash (§3.2)</text>
 
-  <!-- Arrows down to propagation strategy boxes -->
-  <path d="M 175 390 L 175 448" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <path d="M 475 390 L 475 448" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <path d="M 775 390 L 775 448" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Down arrows to strategy boxes -->
+  <path d="M 122 375 L 122 413" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 397 375 L 397 413" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 677 375 L 677 413" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Three propagation strategy boxes -->
-  <!-- Identity propagation -->
-  <g transform="translate(55, 450)">
-    <rect width="240" height="100" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="120" y="28" font-size="14" font-weight="bold" text-anchor="middle" fill="#1E293B">Identity propagation</text>
-    <line x1="15" y1="38" x2="225" y2="38" stroke="#E2E8F0" stroke-width="1"/>
-    <text x="120" y="58" font-size="13" font-family="monospace" text-anchor="middle" fill="#475569">Fₙ(s_faulted) = s_faulted</text>
-    <text x="120" y="80" font-size="12" font-style="italic" text-anchor="middle" fill="#64748B">Fault passes through unchanged</text>
+  <!-- Three strategy boxes (y=415 h=96) -->
+  <g transform="translate(20, 415)">
+    <rect width="205" height="96" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="102" y="24"  font-size="13" font-weight="bold" text-anchor="middle" fill="#1E293B">Identity propagation</text>
+    <line x1="12" y1="34" x2="193" y2="34" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="102" y="54"  font-size="12" font-family="monospace" text-anchor="middle" fill="#475569">Fₙ(s_f) = s_f</text>
+    <text x="102" y="74"  font-size="12" text-anchor="middle" fill="#64748B">Fault passes unchanged</text>
+    <text x="102" y="90"  font-size="11" font-style="italic" text-anchor="middle" fill="#94A3B8">Halt-like path</text>
   </g>
 
-  <!-- Degraded mode -->
-  <g transform="translate(355, 450)">
-    <rect width="240" height="100" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="120" y="28" font-size="14" font-weight="bold" text-anchor="middle" fill="#1E293B">Degraded mode</text>
-    <line x1="15" y1="38" x2="225" y2="38" stroke="#E2E8F0" stroke-width="1"/>
-    <text x="120" y="58" font-size="13" text-anchor="middle" fill="#475569">Predefined fallback</text>
-    <text x="120" y="76" font-size="13" text-anchor="middle" fill="#475569">computation executes</text>
-    <text x="120" y="96" font-size="12" font-style="italic" text-anchor="middle" fill="#64748B">Aerospace / flight control</text>
+  <g transform="translate(295, 415)">
+    <rect width="205" height="96" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="102" y="24"  font-size="13" font-weight="bold" text-anchor="middle" fill="#1E293B">Degraded mode</text>
+    <line x1="12" y1="34" x2="193" y2="34" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="102" y="54"  font-size="12" text-anchor="middle" fill="#475569">Predefined fallback</text>
+    <text x="102" y="72"  font-size="12" text-anchor="middle" fill="#475569">computation executes</text>
+    <text x="102" y="90"  font-size="11" font-style="italic" text-anchor="middle" fill="#94A3B8">Aerospace / flight control</text>
   </g>
 
-  <!-- Explicit fault handling -->
-  <g transform="translate(655, 450)">
-    <rect width="240" height="100" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="120" y="28" font-size="14" font-weight="bold" text-anchor="middle" fill="#1E293B">Explicit handling</text>
-    <line x1="15" y1="38" x2="225" y2="38" stroke="#E2E8F0" stroke-width="1"/>
-    <text x="120" y="58" font-size="13" text-anchor="middle" fill="#475569">Fault vector transformed</text>
-    <text x="120" y="76" font-size="13" text-anchor="middle" fill="#475569">by documented rules</text>
-    <text x="120" y="96" font-size="12" font-style="italic" text-anchor="middle" fill="#64748B">Domain-specific recovery</text>
+  <g transform="translate(575, 415)">
+    <rect width="205" height="96" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="102" y="24"  font-size="13" font-weight="bold" text-anchor="middle" fill="#1E293B">Explicit handling</text>
+    <line x1="12" y1="34" x2="193" y2="34" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="102" y="54"  font-size="12" text-anchor="middle" fill="#475569">Fault vector transformed</text>
+    <text x="102" y="72"  font-size="12" text-anchor="middle" fill="#475569">by documented rules</text>
+    <text x="102" y="90"  font-size="11" font-style="italic" text-anchor="middle" fill="#94A3B8">Domain-specific recovery</text>
   </g>
 
   <!-- Footer rules -->
-  <text x="475" y="588" font-size="13" font-weight="bold" text-anchor="middle" fill="#374151">Chosen strategy MUST be declared in implementation documentation and verified under §9.</text>
-  <text x="475" y="610" font-size="13" text-anchor="middle" fill="#6B7280">Fault vector MUST NOT be silently cleared at any pipeline stage (§8.5).</text>
-  <text x="475" y="632" font-size="13" font-style="italic" text-anchor="middle" fill="#6B7280">Under no circumstances SHALL a computation silently clear or ignore a fault vector — §8.5</text>
+  <text x="400" y="538" font-size="12" font-weight="bold" text-anchor="middle" fill="#374151">Chosen strategy MUST be declared in implementation documentation and verified under §9.</text>
+  <text x="400" y="558" font-size="12" text-anchor="middle" fill="#6B7280">Fault vector MUST NOT be silently cleared at any pipeline stage (§8.5).</text>
+  <text x="400" y="578" font-size="12" font-style="italic" text-anchor="middle" fill="#9CA3AF">Under no circumstances SHALL a computation silently clear or ignore a fault vector — §8.5</text>
 </svg>

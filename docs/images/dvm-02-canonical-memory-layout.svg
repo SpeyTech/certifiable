@@ -1,117 +1,117 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 600" width="100%" style="background-color: #ffffff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 570" width="100%" style="background-color: #ffffff; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
   <defs>
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.06" />
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.06" />
     </filter>
   </defs>
 
-  <text x="475" y="40" font-size="18" font-weight="600" text-anchor="middle" fill="#111827">Canonical state memory layout — §4.2</text>
+  <text x="400" y="36" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">Canonical state memory layout — §4.2</text>
 
   <!--
-    Two columns: LEFT = compiler-padded (bad), RIGHT = DVM byte-packed (good)
-    Divider at x=475
-    Left column content: x=40..455   centre=247
-    Right column content: x=495..910  centre=702
+    Two columns separated at x=400.
+    Left content: x=30..370  centre=200
+    Right content: x=420..770 centre=595
 
-    Row heights = 44px each, gap = 16px between rows
-    Rows start at y=130
+    1 byte = 22px so 8 bytes = 176px
+    Row h=44, gap=16 between rows
+    Rows start y=115
 
-    LEFT layout (uint8 + 7-byte pad | uint64 | int32 + 4-byte pad | uint64):
-      Row 1 y=130: uint8 w=44  pad w=168  (total=212, proportional to 1:7 of 8 bytes)
-      Row 2 y=190: uint64 w=212
-      Row 3 y=250: int32 w=106  pad w=106
-      Row 4 y=310: uint64 w=212
+    LEFT (padded):
+      Row1 y=115: uint8 w=22 | pad w=154 (total=176)
+      Row2 y=175: uint64 w=176
+      Row3 y=235: int32 w=88 | pad w=88
+      Row4 y=295: uint64 w=176
 
-    RIGHT layout (byte-packed, no gaps):
-      Row 1 y=130: uint8 w=26  uint64-start w=186
-      Row 2 y=190: uint64-cont w=212
-      Row 3 y=250: int32 w=106  uint64-start w=106
-      Row 4 y=310: uint64-cont w=212
+    RIGHT (packed):
+      Row1 y=115: uint8 w=22 | uint64-start w=154
+      Row2 y=175: uint64-cont w=176
+      Row3 y=235: int32 w=88 | uint64-start w=88
+      Row4 y=295: uint64-cont w=176
 
-    Scale: 1 byte = 26.5px so 8 bytes = 212px
-    Left col starts x=40, right col starts x=495
+    Left rows start at x=30 (so right edge = 30+176 = 206)
+    Right rows start at x=420
   -->
 
   <!-- Column headers -->
-  <text x="247" y="90" font-size="16" font-weight="bold" text-anchor="middle" fill="#9A3412">Standard (compiler-padded)</text>
-  <text x="702" y="90" font-size="16" font-weight="bold" text-anchor="middle" fill="#065F46">DVM canonical (byte-packed)</text>
+  <text x="200" y="82" font-size="15" font-weight="bold" text-anchor="middle" fill="#9A3412">Standard (compiler-padded)</text>
+  <text x="595" y="82" font-size="15" font-weight="bold" text-anchor="middle" fill="#065F46">DVM canonical (byte-packed)</text>
 
-  <!-- Vertical divider -->
-  <line x1="475" y1="70" x2="475" y2="430" stroke="#E5E7EB" stroke-width="2" stroke-dasharray="6 4"/>
+  <!-- Divider -->
+  <line x1="400" y1="62" x2="400" y2="420" stroke="#E5E7EB" stroke-width="2" stroke-dasharray="6 4"/>
 
-  <!-- ── LEFT COLUMN ── -->
+  <!-- ── LEFT ── -->
 
-  <!-- Row 1: uint8 (1 byte = 26.5px) + padding (7 bytes = 185.5px) -->
-  <rect x="40" y="130" width="27" height="44" rx="4" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
-  <text x="53" y="156" font-size="11" text-anchor="middle" fill="#7F1D1D">u8</text>
+  <!-- Row 1: uint8 + 7-byte padding -->
+  <rect x="30"  y="115" width="22"  height="44" rx="3" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+  <text x="41"  y="141" font-size="10" text-anchor="middle" fill="#7F1D1D">u8</text>
 
-  <rect x="68" y="130" width="184" height="44" rx="4" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="160" y="148" font-size="13" text-anchor="middle" fill="#B91C1C">padding</text>
-  <text x="160" y="166" font-size="12" font-style="italic" text-anchor="middle" fill="#DC2626">7 bytes — undefined content</text>
+  <rect x="53"  y="115" width="153" height="44" rx="3" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="129" y="133" font-size="12" text-anchor="middle" fill="#B91C1C">padding — 7 bytes</text>
+  <text x="129" y="150" font-size="11" font-style="italic" text-anchor="middle" fill="#DC2626">undefined content</text>
 
-  <!-- Row 2: uint64 (8 bytes = 212px) -->
-  <rect x="40" y="190" width="212" height="44" rx="4" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
-  <text x="146" y="216" font-size="13" text-anchor="middle" fill="#9A3412">uint64 — 8 bytes</text>
+  <!-- Row 2: uint64 -->
+  <rect x="30"  y="175" width="176" height="44" rx="3" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
+  <text x="118" y="201" font-size="12" text-anchor="middle" fill="#9A3412">uint64 — 8 bytes</text>
 
-  <!-- Row 3: int32 (4 bytes = 106px) + padding (4 bytes = 106px) -->
-  <rect x="40" y="250" width="106" height="44" rx="4" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
-  <text x="93" y="276" font-size="13" text-anchor="middle" fill="#9A3412">int32</text>
+  <!-- Row 3: int32 + 4-byte padding -->
+  <rect x="30"  y="235" width="88"  height="44" rx="3" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
+  <text x="74"  y="261" font-size="12" text-anchor="middle" fill="#9A3412">int32</text>
 
-  <rect x="147" y="250" width="105" height="44" rx="4" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="199" y="268" font-size="13" text-anchor="middle" fill="#B91C1C">padding</text>
-  <text x="199" y="286" font-size="12" font-style="italic" text-anchor="middle" fill="#DC2626">4 bytes</text>
+  <rect x="119" y="235" width="87"  height="44" rx="3" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="162" y="253" font-size="12" text-anchor="middle" fill="#B91C1C">padding</text>
+  <text x="162" y="270" font-size="11" font-style="italic" text-anchor="middle" fill="#DC2626">4 bytes</text>
 
-  <!-- Row 4: uint64 (8 bytes = 212px) -->
-  <rect x="40" y="310" width="212" height="44" rx="4" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
-  <text x="146" y="336" font-size="13" text-anchor="middle" fill="#9A3412">uint64 — 8 bytes</text>
+  <!-- Row 4: uint64 -->
+  <rect x="30"  y="295" width="176" height="44" rx="3" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
+  <text x="118" y="321" font-size="12" text-anchor="middle" fill="#9A3412">uint64 — 8 bytes</text>
 
-  <!-- Left totals -->
-  <rect x="40" y="385" width="212" height="52" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="146" y="406" font-size="13" font-weight="bold" text-anchor="middle" fill="#B91C1C">21 bytes declared</text>
-  <text x="146" y="426" font-size="13" text-anchor="middle" fill="#DC2626">+ 11 bytes hidden padding</text>
+  <!-- Left result -->
+  <rect x="30" y="360" width="176" height="46" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="118" y="380" font-size="12" font-weight="bold" text-anchor="middle" fill="#B91C1C">21 bytes declared</text>
+  <text x="118" y="397" font-size="12" text-anchor="middle" fill="#DC2626">+ 11 bytes hidden padding</text>
 
-  <text x="146" y="462" font-size="13" font-style="italic" text-anchor="middle" fill="#9A3412">Non-deterministic layout</text>
+  <text x="118" y="430" font-size="12" font-style="italic" text-anchor="middle" fill="#9A3412">Non-deterministic layout</text>
 
-  <!-- ── RIGHT COLUMN ── -->
+  <!-- ── RIGHT ── -->
 
-  <!-- Row 1: uint8 (1 byte = 26.5px) immediately followed by start of uint64 -->
-  <rect x="495" y="130" width="27" height="44" rx="4" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
-  <text x="508" y="156" font-size="11" text-anchor="middle" fill="#064E3B">u8</text>
+  <!-- Row 1: uint8 + uint64 start -->
+  <rect x="420" y="115" width="22"  height="44" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
+  <text x="431" y="141" font-size="10" text-anchor="middle" fill="#064E3B">u8</text>
 
-  <rect x="523" y="130" width="184" height="44" rx="4" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
-  <text x="615" y="148" font-size="13" text-anchor="middle" fill="#065F46">uint64</text>
-  <text x="615" y="166" font-size="12" font-style="italic" text-anchor="middle" fill="#047857">bytes 0–6 of 8, little-endian</text>
+  <rect x="443" y="115" width="153" height="44" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
+  <text x="519" y="133" font-size="12" text-anchor="middle" fill="#065F46">uint64</text>
+  <text x="519" y="150" font-size="11" font-style="italic" text-anchor="middle" fill="#047857">bytes 0–6, little-endian</text>
 
-  <!-- Row 2: uint64 continuation -->
-  <rect x="495" y="190" width="212" height="44" rx="4" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
-  <text x="601" y="208" font-size="13" text-anchor="middle" fill="#065F46">uint64</text>
-  <text x="601" y="226" font-size="12" font-style="italic" text-anchor="middle" fill="#047857">byte 7 of 8 (continued, little-endian)</text>
+  <!-- Row 2: uint64 cont -->
+  <rect x="420" y="175" width="176" height="44" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
+  <text x="508" y="193" font-size="12" text-anchor="middle" fill="#065F46">uint64</text>
+  <text x="508" y="210" font-size="11" font-style="italic" text-anchor="middle" fill="#047857">byte 7 continued, little-endian</text>
 
-  <!-- Row 3: int32 (4 bytes) then start of uint64 (4 bytes) -->
-  <rect x="495" y="250" width="106" height="44" rx="4" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
-  <text x="548" y="276" font-size="13" text-anchor="middle" fill="#065F46">int32</text>
+  <!-- Row 3: int32 + uint64 start -->
+  <rect x="420" y="235" width="88"  height="44" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
+  <text x="464" y="261" font-size="12" text-anchor="middle" fill="#065F46">int32</text>
 
-  <rect x="602" y="250" width="105" height="44" rx="4" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
-  <text x="654" y="268" font-size="13" text-anchor="middle" fill="#065F46">uint64</text>
-  <text x="654" y="284" font-size="12" font-style="italic" text-anchor="middle" fill="#047857">bytes 0–3</text>
+  <rect x="509" y="235" width="87"  height="44" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
+  <text x="552" y="253" font-size="12" text-anchor="middle" fill="#065F46">uint64</text>
+  <text x="552" y="270" font-size="11" font-style="italic" text-anchor="middle" fill="#047857">bytes 0–3</text>
 
-  <!-- Row 4: uint64 continuation -->
-  <rect x="495" y="310" width="212" height="44" rx="4" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
-  <text x="601" y="328" font-size="13" text-anchor="middle" fill="#065F46">uint64</text>
-  <text x="601" y="346" font-size="12" font-style="italic" text-anchor="middle" fill="#047857">bytes 4–7 of 8 (continued, little-endian)</text>
+  <!-- Row 4: uint64 cont -->
+  <rect x="420" y="295" width="176" height="44" rx="3" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
+  <text x="508" y="313" font-size="12" text-anchor="middle" fill="#065F46">uint64</text>
+  <text x="508" y="330" font-size="11" font-style="italic" text-anchor="middle" fill="#047857">bytes 4–7 continued, little-endian</text>
 
-  <!-- Right totals -->
-  <rect x="495" y="385" width="212" height="52" rx="6" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="601" y="406" font-size="13" font-weight="bold" text-anchor="middle" fill="#065F46">21 bytes</text>
-  <text x="601" y="426" font-size="13" text-anchor="middle" fill="#047857">no padding, no gaps</text>
+  <!-- Right result -->
+  <rect x="420" y="360" width="176" height="46" rx="6" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="508" y="380" font-size="12" font-weight="bold" text-anchor="middle" fill="#065F46">21 bytes total</text>
+  <text x="508" y="397" font-size="12" text-anchor="middle" fill="#047857">no padding, no gaps</text>
 
-  <text x="601" y="462" font-size="13" font-style="italic" text-anchor="middle" fill="#065F46">Bit-identical across all platforms</text>
+  <text x="508" y="430" font-size="12" font-style="italic" text-anchor="middle" fill="#065F46">Bit-identical across all platforms</text>
 
   <!-- Legend -->
-  <rect x="280" y="495" width="18" height="14" rx="2" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="3 2"/>
-  <text x="306" y="507" font-size="13" fill="#6B7280">compiler padding — undefined bytes, non-deterministic content</text>
+  <rect x="220" y="458" width="14" height="12" rx="2" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1" stroke-dasharray="3 2"/>
+  <text x="240" y="469" font-size="12" fill="#6B7280">compiler padding — undefined bytes, non-deterministic</text>
 
-  <!-- Footer rules -->
-  <text x="475" y="550" font-size="13" text-anchor="middle" fill="#374151">All multi-byte values use little-endian encoding. Fixed-width types only. No implicit widening (§4.2, §4.3).</text>
-  <text x="475" y="572" font-size="13" font-style="italic" text-anchor="middle" fill="#6B7280">Canonical encoding is the authoritative representation. Internal aligned layout is an implementation detail.</text>
+  <!-- Footer -->
+  <text x="400" y="510" font-size="12" text-anchor="middle" fill="#374151">All multi-byte values little-endian. Fixed-width types only. No implicit widening (§4.2, §4.3).</text>
+  <text x="400" y="530" font-size="12" font-style="italic" text-anchor="middle" fill="#6B7280">Canonical encoding is authoritative. Internal aligned layout is an implementation detail.</text>
 </svg>
