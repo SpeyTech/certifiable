@@ -8,131 +8,122 @@
     </filter>
   </defs>
 
-  <text x="400" y="36" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">Cryptographic commitment chain and replay theorem — §7.2, §7.3</text>
+  <text x="400" y="34" font-size="16" font-weight="600" text-anchor="middle" fill="#111827">Cryptographic commitment chain and replay theorem — §7.2, §7.3</text>
 
   <!--
-    Columns at 800px — no tamper box to the right, embed it as a callout.
-    State:  x=15  w=95   right=110   centre=62
-    gap 14 → arrow
-    Commit: x=130 w=200  right=330   centre=230
-    gap 14 → arrow
-    Ledger: x=350 w=210  right=560   centre=455
-    Tamper: x=578 w=200  right=778
+    Total usable width: x=15 to x=775 = 760px (matches footer cards)
+    20/40/40 split with 20px arrow gaps:
+      State:  x=15   w=112  right=127   centre=71
+      arrow:  127→147 (20px)
+      Commit: x=147  w=272  right=419   centre=283
+      arrow:  419→439 (20px)
+      Ledger: x=439  w=336  right=775   centre=607
 
-    Row h=76, gap=28
-      Row1 y=58   mid=96
-      Row2 y=162  mid=200
-      Row3 y=266  mid=304
+    Row h=80, gap=24
+      Row1 y=55   mid=95
+      Row2 y=159  mid=199
+      Row3 y=263  mid=303
 
-    Chain arrows at x=455 (ledger centre):
-      Row1 bottom y=134 → Row2 top y=162
-      Row2 bottom y=238 → Row3 top y=266 (dashed)
+    Vertical chain arrows at x=607 (ledger centre):
+      Row1 bottom=135 → Row2 top=159
+      Row2 bottom=239 → Row3 top=263
   -->
 
   <!-- Column headers -->
-  <text x="62"  y="52" font-size="11" font-weight="bold" text-anchor="middle" fill="#6B7280">State</text>
-  <text x="230" y="52" font-size="11" font-weight="bold" text-anchor="middle" fill="#6B7280">State commitment</text>
-  <text x="455" y="52" font-size="11" font-weight="bold" text-anchor="middle" fill="#6B7280">Ledger digest</text>
+  <text x="71"  y="50" font-size="11" font-weight="bold" text-anchor="middle" fill="#6B7280">State</text>
+  <text x="283" y="50" font-size="11" font-weight="bold" text-anchor="middle" fill="#6B7280">State commitment</text>
+  <text x="607" y="50" font-size="11" font-weight="bold" text-anchor="middle" fill="#6B7280">Ledger digest</text>
 
-  <!-- ══ ROW 1 ══ -->
-  <g transform="translate(15, 58)">
-    <rect width="95" height="76" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="47" y="32" font-size="24" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#065F46">s₀</text>
-    <text x="47" y="58" font-size="12" text-anchor="middle" fill="#047857">Initial state</text>
+  <!-- ══ ROW 1 ══ y=55 mid=95 -->
+  <g transform="translate(15, 55)">
+    <rect width="112" height="80" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="56" y="32" font-size="22" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#065F46">s₀</text>
+    <text x="56" y="56" font-size="12" text-anchor="middle" fill="#047857">Initial</text>
+    <text x="56" y="71" font-size="12" text-anchor="middle" fill="#047857">state</text>
+  </g>
+  <path d="M 127 95 L 145 95" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g transform="translate(147, 55)">
+    <rect width="272" height="80" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="136" y="24" font-size="14" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#4C1D95">commit(s₀)</text>
+    <text x="136" y="46" font-size="12" font-family="monospace" text-anchor="middle" fill="#6D28D9">DVM:STATE:v1</text>
+    <text x="136" y="65" font-size="11" font-style="italic" text-anchor="middle" fill="#7C3AED">H(tag ‖ len ‖ state)</text>
+  </g>
+  <path d="M 419 95 L 437 95" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g transform="translate(439, 55)">
+    <rect width="336" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="168" y="28" font-size="26" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">L₀</text>
+    <text x="168" y="52" font-size="12" font-family="monospace" text-anchor="middle" fill="#92400E">DVM:LEDGER:v1</text>
+    <text x="168" y="69" font-size="11" font-style="italic" text-anchor="middle" fill="#B45309">H(LEDGER:v1 ‖ commit(s₀))</text>
   </g>
 
-  <path d="M 110 96 L 127 96" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="119" y="88" font-size="9" text-anchor="middle" fill="#9CA3AF">commit</text>
+  <text x="395" y="148" font-size="10" font-family="monospace" text-anchor="middle" fill="#6B7280">L₀ = H(DVM:LEDGER:v1 ‖ commit(s₀))</text>
+  <path d="M 607 135 L 607 157" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <g transform="translate(130, 58)">
-    <rect width="200" height="76" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="100" y="26" font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#4C1D95">commit(s₀)</text>
-    <text x="100" y="46" font-size="11" font-family="monospace" text-anchor="middle" fill="#6D28D9">DVM:STATE:v1</text>
-    <text x="100" y="64" font-size="10" font-style="italic" text-anchor="middle" fill="#7C3AED">H(tag ‖ len ‖ state)</text>
+  <!-- ══ ROW 2 ══ y=159 mid=199 -->
+  <g transform="translate(15, 159)">
+    <rect width="112" height="80" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="56" y="32" font-size="22" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#065F46">s₁</text>
+    <text x="56" y="56" font-size="12" text-anchor="middle" fill="#047857">Next</text>
+    <text x="56" y="71" font-size="12" text-anchor="middle" fill="#047857">state</text>
+  </g>
+  <path d="M 127 199 L 145 199" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g transform="translate(147, 159)">
+    <rect width="272" height="80" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="136" y="24" font-size="14" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#4C1D95">commit(s₁)</text>
+    <text x="136" y="46" font-size="12" font-family="monospace" text-anchor="middle" fill="#6D28D9">DVM:STATE:v1</text>
+    <text x="136" y="65" font-size="11" font-style="italic" text-anchor="middle" fill="#7C3AED">H(tag ‖ len ‖ state)</text>
+  </g>
+  <path d="M 419 199 L 437 199" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g transform="translate(439, 159)">
+    <rect width="336" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="168" y="28" font-size="26" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">L₁</text>
+    <text x="168" y="52" font-size="12" font-family="monospace" text-anchor="middle" fill="#92400E">DVM:LEDGER:v1</text>
+    <text x="168" y="69" font-size="11" font-style="italic" text-anchor="middle" fill="#B45309">H(LEDGER:v1 ‖ L₀ ‖ commit(s₁))</text>
   </g>
 
-  <path d="M 330 96 L 347 96" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="339" y="88" font-size="9" text-anchor="middle" fill="#9CA3AF">H(tag ‖ ·)</text>
+  <text x="395" y="252" font-size="10" font-family="monospace" text-anchor="middle" fill="#6B7280">L₁ = H(DVM:LEDGER:v1 ‖ L₀ ‖ commit(s₁))</text>
+  <path d="M 607 239 L 607 257" stroke="#8892B0" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="622" y="250" font-size="14" fill="#9CA3AF">⋮</text>
 
-  <g transform="translate(350, 58)">
-    <rect width="210" height="76" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="105" y="28" font-size="24" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">L₀</text>
-    <text x="105" y="50" font-size="11" font-family="monospace" text-anchor="middle" fill="#92400E">DVM:LEDGER:v1</text>
-    <text x="105" y="66" font-size="10" font-style="italic" text-anchor="middle" fill="#B45309">H(LEDGER:v1 ‖ commit(s₀))</text>
+  <!-- ══ ROW 3 ══ y=263 mid=303 -->
+  <g transform="translate(15, 263)">
+    <rect width="112" height="80" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="56" y="32" font-size="22" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#065F46">sₜ</text>
+    <text x="56" y="54" font-size="12" text-anchor="middle" fill="#047857">State at</text>
+    <text x="56" y="69" font-size="12" text-anchor="middle" fill="#047857">step t</text>
+  </g>
+  <path d="M 127 303 L 145 303" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g transform="translate(147, 263)">
+    <rect width="272" height="80" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="136" y="24" font-size="14" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#4C1D95">commit(sₜ)</text>
+    <text x="136" y="46" font-size="12" font-family="monospace" text-anchor="middle" fill="#6D28D9">DVM:STATE:v1</text>
+    <text x="136" y="65" font-size="11" font-style="italic" text-anchor="middle" fill="#7C3AED">H(tag ‖ len ‖ state)</text>
+  </g>
+  <path d="M 419 303 L 437 303" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g transform="translate(439, 263)">
+    <rect width="336" height="80" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="168" y="28" font-size="26" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">Lₜ</text>
+    <text x="168" y="52" font-size="12" font-family="monospace" text-anchor="middle" fill="#92400E">DVM:LEDGER:v1</text>
+    <text x="168" y="69" font-size="11" font-style="italic" text-anchor="middle" fill="#B45309">H(LEDGER:v1 ‖ Lₜ₋₁ ‖ commit(sₜ))</text>
   </g>
 
-  <text x="285" y="150" font-size="10" font-family="monospace" text-anchor="middle" fill="#6B7280">L₀ = H(DVM:LEDGER:v1 ‖ commit(s₀))</text>
-  <path d="M 455 134 L 455 160" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Tamper evidence — same x=15 w=760 as footer cards -->
+  <rect x="15" y="363" width="760" height="72" rx="8" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="395" y="385" font-size="13" font-weight="bold" text-anchor="middle" fill="#9A3412">Tamper evidence</text>
+  <text x="395" y="405" font-size="12" text-anchor="middle" fill="#78350F">Any change to any sₙ produces a different commit(sₙ), invalidating Lₙ, Lₙ₊₁ … Lₜ.</text>
+  <text x="395" y="423" font-size="12" font-style="italic" text-anchor="middle" fill="#9A3412">Detectable without any shared secret. No trusted third party required (§7.4).</text>
 
-  <!-- ══ ROW 2 ══ -->
-  <g transform="translate(15, 162)">
-    <rect width="95" height="76" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="47" y="32" font-size="24" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#065F46">s₁</text>
-    <text x="47" y="58" font-size="12" text-anchor="middle" fill="#047857">Next state</text>
-  </g>
+  <!-- Replay theorem — same x=15 w=760 -->
+  <rect x="15" y="451" width="760" height="78" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="395" y="473" font-size="13" font-weight="bold" text-anchor="middle" fill="#1E293B">Deterministic Replay Theorem — §7.3</text>
+  <text x="395" y="493" font-size="12" text-anchor="middle" fill="#374151">Any conforming implementation given identical s₀ and P MUST reproduce</text>
+  <text x="395" y="511" font-size="12" text-anchor="middle" fill="#374151">(L₀, L₁, … Lₜ) byte-identically. The chain is independently auditable by any party.</text>
 
-  <path d="M 110 200 L 127 200" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="119" y="192" font-size="9" text-anchor="middle" fill="#9CA3AF">commit</text>
-
-  <g transform="translate(130, 162)">
-    <rect width="200" height="76" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="100" y="26" font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#4C1D95">commit(s₁)</text>
-    <text x="100" y="46" font-size="11" font-family="monospace" text-anchor="middle" fill="#6D28D9">DVM:STATE:v1</text>
-    <text x="100" y="64" font-size="10" font-style="italic" text-anchor="middle" fill="#7C3AED">H(tag ‖ len ‖ state)</text>
-  </g>
-
-  <path d="M 330 200 L 347 200" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="339" y="192" font-size="9" text-anchor="middle" fill="#9CA3AF">H(tag ‖ L₀ ‖·)</text>
-
-  <g transform="translate(350, 162)">
-    <rect width="210" height="76" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="105" y="28" font-size="24" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">L₁</text>
-    <text x="105" y="50" font-size="11" font-family="monospace" text-anchor="middle" fill="#92400E">DVM:LEDGER:v1</text>
-    <text x="105" y="66" font-size="10" font-style="italic" text-anchor="middle" fill="#B45309">H(LEDGER:v1 ‖ L₀ ‖ commit(s₁))</text>
-  </g>
-
-  <text x="285" y="254" font-size="10" font-family="monospace" text-anchor="middle" fill="#6B7280">L₁ = H(DVM:LEDGER:v1 ‖ L₀ ‖ commit(s₁))</text>
-  <path d="M 455 238 L 455 262" stroke="#8892B0" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
-  <text x="470" y="252" font-size="14" fill="#9CA3AF">⋮</text>
-
-  <!-- ══ ROW 3 ══ -->
-  <g transform="translate(15, 266)">
-    <rect width="95" height="76" rx="8" fill="#F0FDF4" stroke="#6EE7B7" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="47" y="32" font-size="24" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#065F46">sₜ</text>
-    <text x="47" y="58" font-size="12" text-anchor="middle" fill="#047857">State at step t</text>
-  </g>
-
-  <path d="M 110 304 L 127 304" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="119" y="296" font-size="9" text-anchor="middle" fill="#9CA3AF">commit</text>
-
-  <g transform="translate(130, 266)">
-    <rect width="200" height="76" rx="8" fill="#F5F3FF" stroke="#A78BFA" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="100" y="26" font-size="13" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#4C1D95">commit(sₜ)</text>
-    <text x="100" y="46" font-size="11" font-family="monospace" text-anchor="middle" fill="#6D28D9">DVM:STATE:v1</text>
-    <text x="100" y="64" font-size="10" font-style="italic" text-anchor="middle" fill="#7C3AED">H(tag ‖ len ‖ state)</text>
-  </g>
-
-  <path d="M 330 304 L 347 304" stroke="#8892B0" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="339" y="296" font-size="9" text-anchor="middle" fill="#9CA3AF">H(tag ‖ Lₜ₋₁‖·)</text>
-
-  <g transform="translate(350, 266)">
-    <rect width="210" height="76" rx="8" fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.5" filter="url(#shadow)"/>
-    <text x="105" y="28" font-size="24" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#78350F">Lₜ</text>
-    <text x="105" y="50" font-size="11" font-family="monospace" text-anchor="middle" fill="#92400E">DVM:LEDGER:v1</text>
-    <text x="105" y="66" font-size="10" font-style="italic" text-anchor="middle" fill="#B45309">H(LEDGER:v1 ‖ Lₜ₋₁ ‖ commit(sₜ))</text>
-  </g>
-
-  <!-- Tamper evidence — full-width callout below the three rows -->
-  <rect x="15" y="364" width="555" height="74" rx="8" fill="#FFF7ED" stroke="#FDBA74" stroke-width="1.5" stroke-dasharray="6 4"/>
-  <text x="297" y="386" font-size="13" font-weight="bold" text-anchor="middle" fill="#9A3412">Tamper evidence</text>
-  <text x="297" y="406" font-size="12" text-anchor="middle" fill="#78350F">Any change to any sₙ produces a different commit(sₙ), invalidating Lₙ, Lₙ₊₁ … Lₜ.</text>
-  <text x="297" y="424" font-size="12" font-style="italic" text-anchor="middle" fill="#9A3412">Detectable without any shared secret. No trusted third party required (§7.4).</text>
-
-  <!-- Replay theorem -->
-  <rect x="15" y="454" width="555" height="76" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
-  <text x="297" y="476" font-size="13" font-weight="bold" text-anchor="middle" fill="#1E293B">Deterministic Replay Theorem — §7.3</text>
-  <text x="297" y="496" font-size="12" text-anchor="middle" fill="#374151">Any conforming implementation given identical s₀ and P MUST reproduce</text>
-  <text x="297" y="514" font-size="12" text-anchor="middle" fill="#374151">(L₀, L₁, … Lₜ) byte-identically. The chain is independently auditable by any party.</text>
-
-  <text x="400" y="552" font-size="12" font-style="italic" text-anchor="middle" fill="#6B7280">Certification review, regulatory audit, and multi-party verification require no shared secrets.</text>
+  <text x="400" y="554" font-size="12" font-style="italic" text-anchor="middle" fill="#6B7280">Certification review, regulatory audit, and multi-party verification require no shared secrets.</text>
 </svg>
